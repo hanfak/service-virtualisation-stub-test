@@ -21,12 +21,13 @@ public class WeatherApp {
 
     public static void main(String[] args) throws Exception {
         WeatherApp weatherApplication = new WeatherApp(PropertyLoader.loadProperties());
-        weatherApplication.startServer();
+//        weatherApplication.startServer();
         weatherApplication.start();
         weatherApplication.join();
     }
 
     private void start() {
+        startServer();
         info("Starting application...");
 
         server.setHandler(createContextHandlers());
@@ -55,7 +56,8 @@ public class WeatherApp {
         context.setHandler(new HomeHandler());
 
         // TODO: any other path /locationtemp/asf should return 404
-        ContextHandler locationTempContext = new ContextHandler("/locationTemp");
+        ContextHandler locationTempContext = new ContextHandler();
+        locationTempContext.setContextPath("/locationtemp");
         locationTempContext.setHandler(new LocationTemperatureHandler(properties));
 
         ContextHandlerCollection contexts = new ContextHandlerCollection();
