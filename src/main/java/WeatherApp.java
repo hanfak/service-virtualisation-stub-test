@@ -15,18 +15,18 @@ public class WeatherApp {
     private Server server;
     private Properties properties;
 
-    private WeatherApp(Properties properties) {
+    // TODO use two prop files for prod and test
+    public WeatherApp(Properties properties) {
         this.properties = properties;
     }
 
     public static void main(String[] args) throws Exception {
         WeatherApp weatherApplication = new WeatherApp(PropertyLoader.loadProperties());
-//        weatherApplication.startServer();
         weatherApplication.start();
         weatherApplication.join();
     }
 
-    private void start() {
+    public void start() {
         startServer();
         info("Starting application...");
 
@@ -47,7 +47,7 @@ public class WeatherApp {
         info("Server started!");
     }
 
-    private int port() {
+    public int port() {
         return parseInt(properties.getProperty("port"));
     }
 
